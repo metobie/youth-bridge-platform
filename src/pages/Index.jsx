@@ -1,32 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
+import { ArrowRight, CheckCircle } from 'lucide-react';
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-cover bg-fixed bg-center" style={{ backgroundImage: "url('https://i.imgur.com/1Wk8orw.jpeg')" }}>
-      <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg text-center">
-        <h1 className="text-4xl font-bold mb-4">Välkommen till</h1>
-        <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="mx-auto w-64 mb-6" />
-        <p className="text-xl mb-8">Fixa ditt CV och boka online coaching - din väg till drömjobbet börjar här!</p>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-500 to-purple-600 text-white">
+      <header className="p-4">
+        <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
+      </header>
+      
+      <main className="flex-grow flex flex-col items-center justify-center px-4 text-center">
+        <h1 className="text-5xl font-bold mb-6">Välkommen till Rider</h1>
+        <p className="text-xl mb-8 max-w-2xl">Din väg till drömjobbet börjar här. Få hjälp med ditt CV och boka online coaching med våra experter.</p>
+        
+        <div className="space-y-4 mb-12">
+          <FeatureItem text="Skapa ett professionellt CV" />
+          <FeatureItem text="Boka online coaching" />
+          <FeatureItem text="Få personlig feedback" />
+          <FeatureItem text="Hitta ditt drömjobb" />
+        </div>
+        
         <div className="space-x-4">
-          <Button asChild>
+          <Button asChild size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+            <Link to="/register">Kom igång <ArrowRight className="ml-2 h-5 w-5" /></Link>
+          </Button>
+          <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600">
             <Link to="/login">Logga in</Link>
           </Button>
-          <Button asChild variant="outline">
-            <Link to="/register">Registrera</Link>
-          </Button>
         </div>
-      </div>
-      <footer className="mt-8 text-white">
-        <div className="flex space-x-4">
-          <a href="https://www.instagram.com/bearider.se/" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a href="https://www.linkedin.com/company/rider-by-wikan-personal/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="mailto:hej@bearider.se">Email</a>
+      </main>
+      
+      <footer className="p-4 text-center">
+        <div className="flex justify-center space-x-4">
+          <a href="https://www.instagram.com/bearider.se/" target="_blank" rel="noopener noreferrer" className="hover:underline">Instagram</a>
+          <a href="https://www.linkedin.com/company/rider-by-wikan-personal/" target="_blank" rel="noopener noreferrer" className="hover:underline">LinkedIn</a>
+          <a href="mailto:hej@bearider.se" className="hover:underline">Email</a>
         </div>
       </footer>
     </div>
   );
 };
+
+const FeatureItem = ({ text }) => (
+  <div className="flex items-center">
+    <CheckCircle className="h-6 w-6 mr-2 text-green-400" />
+    <span>{text}</span>
+  </div>
+);
 
 export default Index;
