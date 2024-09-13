@@ -4,27 +4,27 @@ import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  },
-  exit: { 
-    opacity: 0,
-    transition: { staggerChildren: 0.05, staggerDirection: -1 }
-  }
-};
+const MotionContainer = ({ children }) => (
+  <motion.div 
+    className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    {children}
+  </motion.div>
+);
 
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1,
-    transition: { type: 'spring', stiffness: 100 }
-  },
-  exit: { y: -20, opacity: 0 }
-};
+const MotionItem = ({ children }) => (
+  <motion.div
+    initial={{ y: 20, opacity: 0 }}
+    animate={{ y: 0, opacity: 1 }}
+    exit={{ y: -20, opacity: 0 }}
+    transition={{ type: 'spring', stiffness: 100 }}
+  >
+    {children}
+  </motion.div>
+);
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,50 +33,44 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically authenticate the user
-    // For now, we'll just navigate to the profile page
     navigate('/profile');
   };
 
   return (
-    <motion.div 
-      className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-    >
-      <motion.div className="flex-grow flex items-center justify-center px-4" variants={containerVariants}>
-        <motion.div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg w-full max-w-md" variants={itemVariants}>
-          <motion.h2 className="text-2xl font-bold mb-6 text-center" variants={itemVariants}>Logga in</motion.h2>
-          <motion.form onSubmit={handleSubmit} className="space-y-4" variants={containerVariants}>
-            <motion.div variants={itemVariants}>
+    <MotionContainer>
+      <div className="flex-grow flex items-center justify-center px-4">
+        <div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg w-full max-w-md">
+          <MotionItem>
+            <h2 className="text-2xl font-bold mb-6 text-center">Logga in</h2>
+          </MotionItem>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <MotionItem>
               <Input
                 type="email"
-                placeholder="E-post"
+                placeholder="E-post (t.ex. anna.andersson@example.com)"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 className="bg-white bg-opacity-20 text-white placeholder-gray-300"
               />
-            </motion.div>
-            <motion.div variants={itemVariants}>
+            </MotionItem>
+            <MotionItem>
               <Input
                 type="password"
-                placeholder="Lösenord"
+                placeholder="Lösenord (t.ex. SecurePass123!)"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 className="bg-white bg-opacity-20 text-white placeholder-gray-300"
               />
-            </motion.div>
-            <motion.div variants={itemVariants}>
+            </MotionItem>
+            <MotionItem>
               <Button type="submit" className="w-full bg-white text-blue-900 hover:bg-gray-100">Logga in</Button>
-            </motion.div>
-          </motion.form>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+            </MotionItem>
+          </form>
+        </div>
+      </div>
+    </MotionContainer>
   );
 };
 
