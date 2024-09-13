@@ -6,10 +6,6 @@ import { ArrowRight, CheckCircle } from 'lucide-react';
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white">
-      <header className="p-4">
-        <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
-      </header>
-      
       <main className="flex-grow flex flex-col items-center justify-center px-4 text-center">
         <h1 className="text-5xl font-bold mb-6">Välkommen till Rider</h1>
         <p className="text-xl mb-8 max-w-2xl">Din väg till drömjobbet börjar här. Få hjälp med ditt CV och boka online coaching med våra experter.</p>

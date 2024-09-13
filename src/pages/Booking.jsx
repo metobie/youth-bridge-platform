@@ -23,9 +23,6 @@ const Booking = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white">
-      <header className="p-4">
-        <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
-      </header>
       <div className="flex-grow flex items-center justify-center px-4">
         <div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg w-full max-w-md">
           <h2 className="text-2xl font-bold mb-6 text-center">Boka online coaching</h2>
