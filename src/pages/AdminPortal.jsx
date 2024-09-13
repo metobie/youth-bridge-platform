@@ -31,7 +31,7 @@ const AdminPortal = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [bookings, setBookings] = useState([
     { id: 1, userName: 'Anna Andersson', coachEmail: 'tim@bearider.se', date: '2024-03-20', time: '10:00' },
-    { id: 2, userName: 'Erik Eriksson', coachEmail: 'coach2@example.com', date: '2024-03-21', time: '14:00' },
+    { id: 2, userName: 'Erik Eriksson', coachEmail: 'eyobel@bearider.se', date: '2024-03-21', time: '14:00' },
   ]);
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
