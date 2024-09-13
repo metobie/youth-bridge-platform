@@ -37,7 +37,7 @@ const AdminPortal = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-500 to-purple-600 text-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white">
       <header className="p-4">
         <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
       </header>
@@ -81,7 +81,7 @@ const AdminPortal = () => {
                     placeholder="E-post"
                     className="bg-white bg-opacity-20 text-white placeholder-gray-300"
                   />
-                  <Button type="submit" className="bg-white text-blue-600 hover:bg-gray-100">Uppdatera användare</Button>
+                  <Button type="submit" className="bg-white text-blue-900 hover:bg-gray-100">Uppdatera användare</Button>
                 </form>
               )}
             </div>
@@ -96,7 +96,7 @@ const AdminPortal = () => {
                   <p>Coach: {booking.coachEmail}</p>
                   <p>Datum: {booking.date}</p>
                   <p>Tid: {booking.time}</p>
-                  <Button onClick={() => handleBookingAccept(booking.id)} className="mt-2 bg-white text-blue-600 hover:bg-gray-100">Acceptera bokning</Button>
+                  <Button onClick={() => handleBookingAccept(booking.id)} className="mt-2 bg-white text-blue-900 hover:bg-gray-100">Acceptera bokning</Button>
                 </li>
               ))}
             </ul>

@@ -22,7 +22,7 @@ const Booking = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-500 to-purple-600 text-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white">
       <header className="p-4">
         <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
       </header>
@@ -63,7 +63,7 @@ const Booking = () => {
               </SelectContent>
             </Select>
 
-            <Button onClick={handleBooking} className="w-full bg-white text-blue-600 hover:bg-gray-100">Boka tid</Button>
+            <Button onClick={handleBooking} className="w-full bg-white text-blue-900 hover:bg-gray-100">Boka tid</Button>
           </div>
         </div>
       </div>

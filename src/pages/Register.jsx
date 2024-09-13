@@ -49,7 +49,7 @@ const Register = () => {
   const skills = ['Kommunikation', 'Ledarskap', 'Problemlösning', 'Kreativitet', 'Teamwork', 'Analytisk förmåga', 'Projektledning', 'Språkkunskaper', 'Teknisk kompetens', 'Kundservice'];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-500 to-purple-600 text-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white">
       <header className="p-4">
         <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
       </header>
@@ -97,11 +97,11 @@ const Register = () => {
               </div>
             </div>
             <Textarea name="about" placeholder="Berätta mer om dig själv, dina drömmar och mål" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
-            <Button type="submit" className="w-full bg-white text-blue-600 hover:bg-gray-100">Registrera</Button>
+            <Button type="submit" className="w-full bg-white text-blue-900 hover:bg-gray-100">Registrera</Button>
           </form>
           <div className="mt-4 text-center">
             <p>Eller registrera med:</p>
-            <Button variant="outline" className="mt-2 bg-white text-blue-600 hover:bg-gray-100">
+            <Button variant="outline" className="mt-2 bg-white text-blue-900 hover:bg-gray-100">
               Apple-konto
             </Button>
           </div>

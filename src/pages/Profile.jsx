@@ -49,7 +49,7 @@ const Profile = () => {
   if (!user) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-500 to-purple-600 text-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white">
       <header className="p-4">
         <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
       </header>
@@ -99,7 +99,7 @@ const Profile = () => {
             </section>
           </div>
 
-          <Button onClick={generatePDF} className="mt-6 bg-white text-blue-600 hover:bg-gray-100">Ladda ner CV som PDF</Button>
+          <Button onClick={generatePDF} className="mt-6 bg-white text-blue-900 hover:bg-gray-100">Ladda ner CV som PDF</Button>
         </div>
       </div>
     </div>
