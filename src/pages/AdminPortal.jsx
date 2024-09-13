@@ -1,9 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Search, Upload } from 'lucide-react';
 import { useDebounce } from '../hooks/useDebounce';
 import UserSearch from '../components/admin/UserSearch';
 import UserEdit from '../components/admin/UserEdit';
@@ -33,7 +29,10 @@ const itemVariants = {
 
 const AdminPortal = () => {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState([
+    { id: 1, userName: 'Anna Andersson', coachEmail: 'coach1@example.com', date: '2024-03-20', time: '10:00' },
+    { id: 2, userName: 'Erik Eriksson', coachEmail: 'coach2@example.com', date: '2024-03-21', time: '14:00' },
+  ]);
   const [searchTerm, setSearchTerm] = useState('');
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
@@ -43,6 +42,12 @@ const AdminPortal = () => {
 
   const handleBookingAccept = useCallback((bookingId, response, files) => {
     console.log('Accepted booking:', bookingId, 'Response:', response, 'Files:', files);
+    // Here you would typically update the booking status in your backend
+    setBookings(prevBookings => 
+      prevBookings.map(booking => 
+        booking.id === bookingId ? { ...booking, status: 'accepted' } : booking
+      )
+    );
     alert('Bokning accepterad!');
   }, []);
 
