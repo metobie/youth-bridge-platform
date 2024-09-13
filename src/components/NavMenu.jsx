@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { HomeIcon, UserIcon, CalendarIcon, ShieldIcon, LogInIcon, UserPlusIcon, MenuIcon } from "lucide-react";
+import { HomeIcon, UserIcon, CalendarIcon, ShieldIcon, LogInIcon, UserPlusIcon, MenuIcon, XIcon } from "lucide-react";
 
 const NavMenu = () => {
   const location = useLocation();
@@ -21,7 +21,7 @@ const NavMenu = () => {
   };
 
   return (
-    <nav className="bg-gray-900 bg-opacity-50 p-4">
+    <nav className="bg-gray-900 bg-opacity-50 p-4 relative z-50">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center">
           <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-24" />
@@ -46,12 +46,12 @@ const NavMenu = () => {
         </div>
         <div className="md:hidden">
           <Button onClick={toggleMenu} variant="ghost" className="text-white">
-            <MenuIcon className="h-6 w-6" />
+            {isMenuOpen ? <XIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
           </Button>
         </div>
       </div>
       {isMenuOpen && (
-        <div className="md:hidden mt-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-gray-900 bg-opacity-95 shadow-lg">
           {navItems.map((item) => (
             <Button
               key={item.to}
@@ -63,7 +63,7 @@ const NavMenu = () => {
               `}
               onClick={() => setIsMenuOpen(false)}
             >
-              <Link to={item.to} className="flex items-center">
+              <Link to={item.to} className="flex items-center p-4">
                 {item.icon}
                 <span className="ml-2">{item.title}</span>
               </Link>
