@@ -26,8 +26,8 @@ const NavMenu = () => {
             <Button
               key={item.to}
               asChild
-              variant={location.pathname === item.to ? "secondary" : "ghost"}
-              className="text-white"
+              variant={location.pathname === item.to ? "default" : "ghost"}
+              className={location.pathname === item.to ? "bg-blue-700 text-white" : "text-white hover:bg-gray-800"}
             >
               <Link to={item.to} className="flex items-center">
                 {item.icon}
