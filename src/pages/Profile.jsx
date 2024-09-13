@@ -22,7 +22,7 @@ const Profile = () => {
       skills: ['Kommunikation', 'Problemlösning', 'Teamwork', 'Analytisk förmåga', 'Teknisk kompetens'],
       desiredIndustry: 'IT',
       about: 'Jag är en passionerad programmerare med stort intresse för AI och maskininlärning. Mitt mål är att bidra till utvecklingen av innovativa teknologiska lösningar som kan förbättra människors liv.',
-      profileImage: 'https://github.com/identicons/jasonlong.png' // GitHub standard profile picture
+      profileImage: 'https://github.com/shadcn.png'
     };
     setUser(fetchedUser);
 
