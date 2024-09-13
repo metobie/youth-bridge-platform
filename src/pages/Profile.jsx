@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
@@ -29,7 +28,6 @@ const itemVariants = {
 
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [xpLevel, setXpLevel] = useState(0);
 
   useEffect(() => {
     // Simulating fetching user data
@@ -48,12 +46,6 @@ const Profile = () => {
       profileImage: 'https://github.com/shadcn.png'
     };
     setUser(fetchedUser);
-
-    // Calculate XP level based on profile completeness
-    const totalFields = Object.keys(fetchedUser).length;
-    const filledFields = Object.values(fetchedUser).filter(value => value && value.length > 0).length;
-    const completionPercentage = (filledFields / totalFields) * 100;
-    setXpLevel(Math.floor(completionPercentage));
   }, []);
 
   const generatePDF = () => {
@@ -87,11 +79,6 @@ const Profile = () => {
               <h1 className="text-3xl font-bold">{user.firstName} {user.lastName}</h1>
               <p className="text-gray-200">{user.email} | {user.phoneNumber}</p>
             </div>
-          </motion.div>
-          
-          <motion.div className="mb-6" variants={itemVariants}>
-            <h2 className="text-xl font-semibold mb-2">XP Level: {xpLevel}</h2>
-            <Progress value={xpLevel} className="w-full" />
           </motion.div>
 
           <motion.div id="cv-content" className="space-y-4" variants={containerVariants}>
