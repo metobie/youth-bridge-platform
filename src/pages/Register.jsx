@@ -85,32 +85,32 @@ const Register = () => {
           <motion.form onSubmit={handleSubmit} className="space-y-4" variants={containerVariants}>
             <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4" variants={containerVariants}>
               <motion.div variants={itemVariants}>
-                <Input name="firstName" placeholder="Förnamn (t.ex. Anna)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+                <Input name="firstName" placeholder="Förnamn (t.ex. Anna)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
               </motion.div>
               <motion.div variants={itemVariants}>
-                <Input name="lastName" placeholder="Efternamn (t.ex. Andersson)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+                <Input name="lastName" placeholder="Efternamn (t.ex. Andersson)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
               </motion.div>
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Input name="email" type="email" placeholder="E-post (t.ex. anna.andersson@example.com)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+              <Input name="email" type="email" placeholder="E-post (t.ex. anna.andersson@example.com)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Input name="password" type="password" placeholder="Lösenord (minst 8 tecken)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+              <Input name="password" type="password" placeholder="Lösenord (minst 8 tecken)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Input name="phoneNumber" placeholder="Telefonnummer (t.ex. 0701234567)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+              <Input name="phoneNumber" placeholder="Telefonnummer (t.ex. 0701234567)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Input name="city" placeholder="Ort (t.ex. Stockholm)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+              <Input name="city" placeholder="Ort (t.ex. Stockholm)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Input name="school" placeholder="Skola/Universitet (t.ex. Stockholms universitet)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+              <Input name="school" placeholder="Skola/Universitet (t.ex. Stockholms universitet)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Input name="studyAreas" placeholder="Studieområden (t.ex. Datavetenskap, Ekonomi)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+              <Input name="studyAreas" placeholder="Studieområden (t.ex. Datavetenskap, Ekonomi)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
             </motion.div>
             <motion.div variants={itemVariants}>
-              <Input name="interests" placeholder="Intressen (t.ex. Programmering, Musik, Resor)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
+              <Input name="interests" placeholder="Intressen (t.ex. Programmering, Musik, Resor)" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" />
             </motion.div>
             <motion.div variants={itemVariants}>
               <Select name="desiredIndustry" onValueChange={(value) => handleChange({ target: { name: 'desiredIndustry', value } })}>
@@ -148,7 +148,7 @@ const Register = () => {
                 placeholder="Berätta mer om dig själv, dina drömmar och mål (t.ex. Jag är en passionerad programmerare med stort intresse för AI...)" 
                 onChange={handleChange} 
                 required 
-                className="bg-white bg-opacity-20 text-white placeholder-gray-300" 
+                className="bg-white bg-opacity-20 text-white placeholder-gray-300 placeholder-opacity-70" 
               />
             </motion.div>
             <motion.div variants={itemVariants}>
