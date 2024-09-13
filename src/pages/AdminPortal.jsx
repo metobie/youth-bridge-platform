@@ -29,7 +29,7 @@ const itemVariants = {
 
 const AdminPortal = () => {
   const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [bookings, setBookings] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -39,11 +39,10 @@ const AdminPortal = () => {
   useEffect(() => {
     // Simulating fetching users and bookings
     const fetchedUsers = [
-      { id: 1, firstName: 'Tobias', lastName: 'Karlsson', email: 'tobias@mail.se' },
-      { id: 2, firstName: 'Robert', lastName: 'Nesta Nuhu', email: 'robert@mail.se' }
+      { id: 1, firstName: 'Tobias', lastName: 'Karlsson', email: 'tobias@mail.se', phoneNumber: '0701234567' },
+      { id: 2, firstName: 'Robert', lastName: 'Nesta Nuhu', email: 'robert@mail.se', phoneNumber: '0709876543' }
     ];
     setUsers(fetchedUsers);
-    setFilteredUsers(fetchedUsers);
     setBookings([
       { id: 1, userId: 1, coachEmail: 'tim@bearider.se', date: '2024-03-18', time: '09:00' },
       { id: 2, userId: 2, coachEmail: 'eyobel@bearider.se', date: '2024-03-19', time: '10:15' }
@@ -53,12 +52,17 @@ const AdminPortal = () => {
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
-    const filtered = users.filter(user => 
-      user.firstName.toLowerCase().includes(term) || 
-      user.lastName.toLowerCase().includes(term) || 
-      user.email.toLowerCase().includes(term)
-    );
-    setFilteredUsers(filtered);
+    if (term.length > 0) {
+      const results = users.filter(user => 
+        user.firstName.toLowerCase().includes(term) || 
+        user.lastName.toLowerCase().includes(term) || 
+        user.email.toLowerCase().includes(term) ||
+        user.phoneNumber.includes(term)
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
   };
 
   const handleUserSelect = (user) => {
@@ -86,27 +90,29 @@ const AdminPortal = () => {
     alert('Bokning accepterad!');
   };
 
-  const UserList = () => (
+  const UserSearch = () => (
     <motion.div variants={itemVariants}>
-      <h2 className="text-2xl font-bold mb-4">Användare</h2>
+      <h2 className="text-2xl font-bold mb-4">Sök användare</h2>
       <div className="flex items-center mb-4">
         <Search className="mr-2" />
         <Input 
-          placeholder="Sök användare..." 
+          placeholder="Sök på namn, e-post eller telefonnummer..." 
           value={searchTerm}
           onChange={handleSearch}
           className="bg-white bg-opacity-20 text-white placeholder-gray-300"
         />
       </div>
-      <ul className="space-y-2">
-        {filteredUsers.map(user => (
-          <motion.li key={user.id} variants={itemVariants}>
-            <Button onClick={() => handleUserSelect(user)} variant="outline" className="w-full text-left bg-white bg-opacity-20 text-white hover:bg-white hover:bg-opacity-30">
-              {user.firstName} {user.lastName}
-            </Button>
-          </motion.li>
-        ))}
-      </ul>
+      {searchResults.length > 0 && (
+        <ul className="space-y-2">
+          {searchResults.map(user => (
+            <motion.li key={user.id} variants={itemVariants}>
+              <Button onClick={() => handleUserSelect(user)} variant="outline" className="w-full text-left bg-white bg-opacity-20 text-white hover:bg-white hover:bg-opacity-30">
+                {user.firstName} {user.lastName} - {user.email} - {user.phoneNumber}
+              </Button>
+            </motion.li>
+          ))}
+        </ul>
+      )}
     </motion.div>
   );
 
@@ -129,6 +135,12 @@ const AdminPortal = () => {
         value={selectedUser.email}
         onChange={(e) => setSelectedUser({...selectedUser, email: e.target.value})}
         placeholder="E-post"
+        className="bg-white bg-opacity-20 text-white placeholder-gray-300"
+      />
+      <Input 
+        value={selectedUser.phoneNumber}
+        onChange={(e) => setSelectedUser({...selectedUser, phoneNumber: e.target.value})}
+        placeholder="Telefonnummer"
         className="bg-white bg-opacity-20 text-white placeholder-gray-300"
       />
       <Button type="submit" className="bg-white text-blue-900 hover:bg-gray-100">Uppdatera användare</Button>
@@ -180,7 +192,7 @@ const AdminPortal = () => {
           <motion.h1 className="text-3xl font-bold mb-6" variants={itemVariants}>Admin Portal</motion.h1>
           
           <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8" variants={containerVariants}>
-            <UserList />
+            <UserSearch />
             {selectedUser && <UserEdit />}
           </motion.div>
 
