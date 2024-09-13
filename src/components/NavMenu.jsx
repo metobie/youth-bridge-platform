@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { HomeIcon, UserIcon, CalendarIcon, ShieldIcon, LogInIcon, UserPlusIcon, MenuIcon, XIcon } from "lucide-react";
+import { HomeIcon, UserIcon, CalendarIcon, ShieldIcon, LogInIcon, LogOutIcon, UserPlusIcon, MenuIcon, XIcon } from "lucide-react";
 
-const NavMenu = () => {
+const NavMenu = ({ isAuthenticated, onLogout }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
@@ -12,12 +13,25 @@ const NavMenu = () => {
     { title: "Profil", to: "/profile", icon: <UserIcon className="h-4 w-4" /> },
     { title: "Boka coaching", to: "/booking", icon: <CalendarIcon className="h-4 w-4" /> },
     { title: "Admin", to: "/admin", icon: <ShieldIcon className="h-4 w-4" /> },
-    { title: "Logga in", to: "/login", icon: <LogInIcon className="h-4 w-4" /> },
+    { 
+      title: isAuthenticated ? "Logga ut" : "Logga in", 
+      to: isAuthenticated ? "/" : "/login", 
+      icon: isAuthenticated ? <LogOutIcon className="h-4 w-4" /> : <LogInIcon className="h-4 w-4" />,
+      onClick: isAuthenticated ? onLogout : null
+    },
     { title: "Registrera", to: "/register", icon: <UserPlusIcon className="h-4 w-4" /> },
   ];
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleNavItemClick = (item) => {
+    if (item.onClick) {
+      item.onClick();
+    }
+    navigate(item.to);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -30,17 +44,17 @@ const NavMenu = () => {
           {navItems.map((item) => (
             <Button
               key={item.to}
-              asChild
+              onClick={() => handleNavItemClick(item)}
               variant={location.pathname === item.to ? "default" : "ghost"}
               className={`
                 ${location.pathname === item.to ? "bg-blue-800 text-white" : "text-white hover:bg-gray-800"}
                 hover:text-white transition-colors duration-200
               `}
             >
-              <Link to={item.to} className="flex items-center">
+              <span className="flex items-center">
                 {item.icon}
                 <span className="ml-2">{item.title}</span>
-              </Link>
+              </span>
             </Button>
           ))}
         </div>
@@ -55,18 +69,17 @@ const NavMenu = () => {
           {navItems.map((item) => (
             <Button
               key={item.to}
-              asChild
+              onClick={() => handleNavItemClick(item)}
               variant={location.pathname === item.to ? "default" : "ghost"}
               className={`
                 ${location.pathname === item.to ? "bg-blue-800 text-white" : "text-white hover:bg-gray-800"}
                 hover:text-white transition-colors duration-200 w-full justify-start mb-2
               `}
-              onClick={() => setIsMenuOpen(false)}
             >
-              <Link to={item.to} className="flex items-center p-4">
+              <span className="flex items-center p-4">
                 {item.icon}
                 <span className="ml-2">{item.title}</span>
-              </Link>
+              </span>
             </Button>
           ))}
         </div>
