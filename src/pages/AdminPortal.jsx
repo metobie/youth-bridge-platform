@@ -40,8 +40,8 @@ const AdminPortal = () => {
     setSelectedUser(user);
   }, []);
 
-  const handleBookingAccept = useCallback((bookingId, response, files) => {
-    console.log('Accepted booking:', bookingId, 'Response:', response, 'Files:', files);
+  const handleBookingAccept = useCallback((bookingId) => {
+    console.log('Accepted booking:', bookingId);
     // Here you would typically update the booking status in your backend
     setBookings(prevBookings => 
       prevBookings.map(booking => 
