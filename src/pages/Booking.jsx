@@ -22,44 +22,49 @@ const Booking = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-fixed bg-center" style={{ backgroundImage: "url('https://i.imgur.com/1Wk8orw.jpeg')" }}>
-      <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Boka online coaching</h2>
-        <div className="space-y-4">
-          <Select onValueChange={setSelectedCoach}>
-            <SelectTrigger>
-              <SelectValue placeholder="Välj coach" />
-            </SelectTrigger>
-            <SelectContent>
-              {coaches.map(coach => (
-                <SelectItem key={coach.email} value={coach.email}>{coach.name}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-blue-500 to-purple-600 text-white">
+      <header className="p-4">
+        <img src="https://i.imgur.com/Z8YkO4R.png" alt="Rider Logo" className="w-32" />
+      </header>
+      <div className="flex-grow flex items-center justify-center px-4">
+        <div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg w-full max-w-md">
+          <h2 className="text-2xl font-bold mb-6 text-center">Boka online coaching</h2>
+          <div className="space-y-4">
+            <Select onValueChange={setSelectedCoach}>
+              <SelectTrigger className="bg-white bg-opacity-20 text-white border-white border-opacity-20">
+                <SelectValue placeholder="Välj coach" />
+              </SelectTrigger>
+              <SelectContent>
+                {coaches.map(coach => (
+                  <SelectItem key={coach.email} value={coach.email}>{coach.name}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-          <Select onValueChange={setSelectedDate}>
-            <SelectTrigger>
-              <SelectValue placeholder="Välj datum" />
-            </SelectTrigger>
-            <SelectContent>
-              {availableDates.map(date => (
-                <SelectItem key={date} value={date}>{date}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            <Select onValueChange={setSelectedDate}>
+              <SelectTrigger className="bg-white bg-opacity-20 text-white border-white border-opacity-20">
+                <SelectValue placeholder="Välj datum" />
+              </SelectTrigger>
+              <SelectContent>
+                {availableDates.map(date => (
+                  <SelectItem key={date} value={date}>{date}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-          <Select onValueChange={setSelectedTime}>
-            <SelectTrigger>
-              <SelectValue placeholder="Välj tid" />
-            </SelectTrigger>
-            <SelectContent>
-              {availableTimes.map(time => (
-                <SelectItem key={time} value={time}>{time}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+            <Select onValueChange={setSelectedTime}>
+              <SelectTrigger className="bg-white bg-opacity-20 text-white border-white border-opacity-20">
+                <SelectValue placeholder="Välj tid" />
+              </SelectTrigger>
+              <SelectContent>
+                {availableTimes.map(time => (
+                  <SelectItem key={time} value={time}>{time}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
 
-          <Button onClick={handleBooking} className="w-full bg-white text-blue-600 hover:bg-gray-100">Boka tid</Button>
+            <Button onClick={handleBooking} className="w-full bg-white text-blue-600 hover:bg-gray-100">Boka tid</Button>
+          </div>
         </div>
       </div>
     </div>
