@@ -96,12 +96,6 @@ const Register = () => {
             <Textarea name="about" placeholder="Berätta mer om dig själv, dina drömmar och mål" onChange={handleChange} required className="bg-white bg-opacity-20 text-white placeholder-gray-300" />
             <Button type="submit" className="w-full bg-white text-blue-900 hover:bg-gray-100">Registrera</Button>
           </form>
-          <div className="mt-4 text-center">
-            <p>Eller registrera med:</p>
-            <Button variant="outline" className="mt-2 bg-white text-blue-900 hover:bg-gray-100">
-              Apple-konto
-            </Button>
-          </div>
         </div>
       </div>
     </div>
