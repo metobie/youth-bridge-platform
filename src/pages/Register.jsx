@@ -84,7 +84,7 @@ const IndustrySelect = ({ value, onChange }) => (
       </SelectTrigger>
       <SelectContent>
         {['IT', 'Finans', 'Sjukvård', 'Utbildning', 'Marknadsföring'].map(industry => (
-          <SelectItem key={industry.toLowerCase()} value={industry.toLowerCase()}>{industry}</SelectItem>
+          <SelectItem key={industry.toLowerCase()} value={industry.toLowerCase()} className="text-white">{industry}</SelectItem>
         ))}
       </SelectContent>
     </Select>
