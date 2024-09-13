@@ -49,8 +49,8 @@ const Profile = () => {
   if (!user) return <div>Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-cover bg-fixed bg-center p-8" style={{ backgroundImage: "url('https://i.imgur.com/1Wk8orw.jpeg')" }}>
-      <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-4xl mx-auto">
+    <div className="min-h-screen bg-cover bg-fixed bg-center p-8 flex flex-col" style={{ backgroundImage: "url('https://i.imgur.com/1Wk8orw.jpeg')" }}>
+      <div className="bg-white bg-opacity-90 p-8 rounded-lg shadow-lg max-w-4xl mx-auto flex-grow">
         <div className="flex items-center mb-6">
           <img src={user.profileImage} alt="Profile" className="w-24 h-24 rounded-full mr-4" />
           <div>
@@ -95,7 +95,7 @@ const Profile = () => {
           </section>
         </div>
 
-        <Button onClick={generatePDF} className="mt-6">Ladda ner CV som PDF</Button>
+        <Button onClick={generatePDF} className="mt-6 bg-white text-blue-600 hover:bg-gray-100">Ladda ner CV som PDF</Button>
       </div>
     </div>
   );

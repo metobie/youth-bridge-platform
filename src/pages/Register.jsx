@@ -93,11 +93,11 @@ const Register = () => {
             </div>
           </div>
           <Textarea name="about" placeholder="Berätta mer om dig själv, dina drömmar och mål" onChange={handleChange} required />
-          <Button type="submit" className="w-full">Registrera</Button>
+          <Button type="submit" className="w-full bg-white text-blue-600 hover:bg-gray-100">Registrera</Button>
         </form>
         <div className="mt-4 text-center">
           <p>Eller registrera med:</p>
-          <Button variant="outline" className="mt-2">
+          <Button variant="outline" className="mt-2 bg-white text-blue-600 hover:bg-gray-100">
             Apple-konto
           </Button>
         </div>

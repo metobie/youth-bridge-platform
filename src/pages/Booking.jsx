@@ -59,7 +59,7 @@ const Booking = () => {
             </SelectContent>
           </Select>
 
-          <Button onClick={handleBooking} className="w-full">Boka tid</Button>
+          <Button onClick={handleBooking} className="w-full bg-white text-blue-600 hover:bg-gray-100">Boka tid</Button>
         </div>
       </div>
     </div>

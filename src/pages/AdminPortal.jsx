@@ -75,7 +75,7 @@ const AdminPortal = () => {
                   onChange={(e) => setSelectedUser({...selectedUser, email: e.target.value})}
                   placeholder="E-post"
                 />
-                <Button type="submit">Uppdatera användare</Button>
+                <Button type="submit" className="bg-white text-blue-600 hover:bg-gray-100">Uppdatera användare</Button>
               </form>
             )}
           </div>
@@ -90,7 +90,7 @@ const AdminPortal = () => {
                 <p>Coach: {booking.coachEmail}</p>
                 <p>Datum: {booking.date}</p>
                 <p>Tid: {booking.time}</p>
-                <Button onClick={() => handleBookingAccept(booking.id)} className="mt-2">Acceptera bokning</Button>
+                <Button onClick={() => handleBookingAccept(booking.id)} className="mt-2 bg-white text-blue-600 hover:bg-gray-100">Acceptera bokning</Button>
               </li>
             ))}
           </ul>
