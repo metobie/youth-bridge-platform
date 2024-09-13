@@ -43,7 +43,6 @@ const Index = () => {
           <FeatureItem text="Skapa ett professionellt CV" />
           <FeatureItem text="Boka online coaching" />
           <FeatureItem text="Få personlig feedback" />
-          <FeatureItem text="Hitta ditt drömjobb" />
         </motion.div>
         
         <motion.div className="space-x-4" variants={itemVariants}>
