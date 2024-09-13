@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,6 +31,8 @@ const Booking = () => {
   const [selectedCoach, setSelectedCoach] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
+  const [message, setMessage] = useState('');
+  const [files, setFiles] = useState([]);
 
   const coaches = [
     { name: 'Eyobel Samson', email: 'eyobel@bearider.se' },
@@ -38,10 +42,27 @@ const Booking = () => {
   const availableDates = ['2024-03-18', '2024-03-19', '2024-03-20']; // Monday to Wednesday
   const availableTimes = ['09:00', '09:45', '10:15'];
 
+  const handleFileChange = (e) => {
+    setFiles(Array.from(e.target.files));
+  };
+
   const handleBooking = () => {
-    console.log('Booking:', { selectedCoach, selectedDate, selectedTime });
+    console.log('Booking:', { selectedCoach, selectedDate, selectedTime, message, files });
     // Here you would typically send the booking data to your backend
-    alert('Bokning skickad!');
+    // You'd need to use FormData to send files along with other data
+    const formData = new FormData();
+    formData.append('coach', selectedCoach);
+    formData.append('date', selectedDate);
+    formData.append('time', selectedTime);
+    formData.append('message', message);
+    files.forEach((file, index) => {
+      formData.append(`file${index}`, file);
+    });
+
+    // Simulating an API call
+    setTimeout(() => {
+      alert('Bokning skickad!');
+    }, 1000);
   };
 
   return (
@@ -93,6 +114,25 @@ const Booking = () => {
                   ))}
                 </SelectContent>
               </Select>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <Textarea
+                placeholder="Lämna ett meddelande (valfritt)"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="bg-white bg-opacity-20 text-white border-white border-opacity-20 placeholder-gray-400"
+              />
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <Input
+                type="file"
+                onChange={handleFileChange}
+                multiple
+                className="bg-white bg-opacity-20 text-white border-white border-opacity-20 file:bg-blue-600 file:text-white file:border-0 file:rounded-md file:px-4 file:py-2 file:mr-4 file:hover:bg-blue-700 cursor-pointer"
+              />
+              <p className="text-sm mt-2 text-gray-300">Du kan bifoga en eller flera filer (valfritt)</p>
             </motion.div>
 
             <motion.div variants={itemVariants}>
