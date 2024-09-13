@@ -80,11 +80,11 @@ const IndustrySelect = ({ value, onChange }) => (
   <motion.div variants={itemVariants}>
     <Select name="desiredIndustry" onValueChange={(value) => onChange({ target: { name: 'desiredIndustry', value } })}>
       <SelectTrigger className="bg-white bg-opacity-20 text-white border-white border-opacity-20">
-        <SelectValue placeholder="Önskad bransch" className="text-white placeholder-white" />
+        <SelectValue placeholder="Önskad bransch" />
       </SelectTrigger>
       <SelectContent>
         {['IT', 'Finans', 'Sjukvård', 'Utbildning', 'Marknadsföring'].map(industry => (
-          <SelectItem key={industry.toLowerCase()} value={industry.toLowerCase()} className="text-white">{industry}</SelectItem>
+          <SelectItem key={industry.toLowerCase()} value={industry.toLowerCase()}>{industry}</SelectItem>
         ))}
       </SelectContent>
     </Select>
