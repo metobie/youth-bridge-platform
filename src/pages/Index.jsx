@@ -35,7 +35,7 @@ const Index = () => {
       animate="visible"
       exit="exit"
     >
-      <motion.main className="flex-grow flex flex-col items-center justify-center px-4 text-center" variants={containerVariants}>
+      <motion.main className="flex-grow flex flex-col items-center justify-center px-4 text-center relative" variants={containerVariants}>
         <motion.h1 className="text-5xl font-bold mb-6" variants={itemVariants}>Välkommen till Rider</motion.h1>
         <motion.p className="text-xl mb-8 max-w-2xl" variants={itemVariants}>Din väg till drömjobbet börjar här. Få hjälp med ditt CV och boka online coaching med våra experter.</motion.p>
         
@@ -54,24 +54,13 @@ const Index = () => {
             <Link to="/login">Logga in</Link>
           </Button>
         </motion.div>
+
+        <motion.div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-6" variants={itemVariants}>
+          <SocialIcon href="https://www.instagram.com/bearider.se/" icon={<Instagram className="h-6 w-6" />} label="Instagram" />
+          <SocialIcon href="https://www.linkedin.com/company/rider-by-wikan-personal/" icon={<Linkedin className="h-6 w-6" />} label="LinkedIn" />
+          <SocialIcon href="mailto:hej@bearider.se" icon={<Mail className="h-6 w-6" />} label="Email" />
+        </motion.div>
       </motion.main>
-      
-      <motion.footer className="p-4 text-center" variants={itemVariants}>
-        <div className="flex justify-center space-x-6">
-          <a href="https://www.instagram.com/bearider.se/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">
-            <Instagram className="h-6 w-6" />
-            <span className="sr-only">Instagram</span>
-          </a>
-          <a href="https://www.linkedin.com/company/rider-by-wikan-personal/" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">
-            <Linkedin className="h-6 w-6" />
-            <span className="sr-only">LinkedIn</span>
-          </a>
-          <a href="mailto:hej@bearider.se" className="hover:text-gray-300 transition-colors">
-            <Mail className="h-6 w-6" />
-            <span className="sr-only">Email</span>
-          </a>
-        </div>
-      </motion.footer>
     </motion.div>
   );
 };
@@ -81,6 +70,13 @@ const FeatureItem = ({ text }) => (
     <CheckCircle className="h-6 w-6 mr-2 text-green-400" />
     <span>{text}</span>
   </motion.div>
+);
+
+const SocialIcon = ({ href, icon, label }) => (
+  <a href={href} target="_blank" rel="noopener noreferrer" className="hover:text-gray-300 transition-colors">
+    {icon}
+    <span className="sr-only">{label}</span>
+  </a>
 );
 
 export default Index;
