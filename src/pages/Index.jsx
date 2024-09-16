@@ -29,13 +29,13 @@ const itemVariants = {
 const Index = () => {
   return (
     <motion.div 
-      className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white"
+      className="min-h-screen flex flex-col bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white relative"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
-      <motion.main className="flex-grow flex flex-col items-center justify-center px-4 text-center relative" variants={containerVariants}>
+      <motion.main className="flex-grow flex flex-col items-center justify-center px-4 text-center" variants={containerVariants}>
         <motion.h1 className="text-5xl font-bold mb-6" variants={itemVariants}>Välkommen till Rider</motion.h1>
         <motion.p className="text-xl mb-8 max-w-2xl" variants={itemVariants}>Din väg till drömjobbet börjar här. Få hjälp med ditt CV och boka online coaching med våra experter.</motion.p>
         
@@ -54,13 +54,13 @@ const Index = () => {
             <Link to="/login">Logga in</Link>
           </Button>
         </motion.div>
-
-        <motion.div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-6" variants={itemVariants}>
-          <SocialIcon href="https://www.instagram.com/bearider.se/" icon={<Instagram className="h-6 w-6" />} label="Instagram" />
-          <SocialIcon href="https://www.linkedin.com/company/rider-by-wikan-personal/" icon={<Linkedin className="h-6 w-6" />} label="LinkedIn" />
-          <SocialIcon href="mailto:hej@bearider.se" icon={<Mail className="h-6 w-6" />} label="Email" />
-        </motion.div>
       </motion.main>
+
+      <motion.div className="fixed bottom-8 left-0 right-0 flex justify-center space-x-6 bg-gradient-to-t from-gray-900 to-transparent py-4" variants={itemVariants}>
+        <SocialIcon href="https://www.instagram.com/bearider.se/" icon={<Instagram className="h-6 w-6" />} label="Instagram" />
+        <SocialIcon href="https://www.linkedin.com/company/rider-by-wikan-personal/" icon={<Linkedin className="h-6 w-6" />} label="LinkedIn" />
+        <SocialIcon href="mailto:hej@bearider.se" icon={<Mail className="h-6 w-6" />} label="Email" />
+      </motion.div>
     </motion.div>
   );
 };
