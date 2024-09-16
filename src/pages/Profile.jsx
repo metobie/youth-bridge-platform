@@ -8,6 +8,24 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 import { X } from 'lucide-react';
 
+// TODO: Implement backend logic for fetching and updating user profile
+// Example backend function:
+// async function fetchUserProfile(userId) {
+//   const response = await fetch(`/api/users/${userId}`);
+//   if (!response.ok) throw new Error('Failed to fetch user profile');
+//   return response.json();
+// }
+
+// async function updateUserProfile(userId, profileData) {
+//   const response = await fetch(`/api/users/${userId}`, {
+//     method: 'PUT',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(profileData)
+//   });
+//   if (!response.ok) throw new Error('Failed to update user profile');
+//   return response.json();
+// }
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { 
@@ -35,6 +53,13 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
+    // TODO: Fetch user profile from backend
+    // Example:
+    // const userId = localStorage.getItem('userId');
+    // fetchUserProfile(userId)
+    //   .then(userData => setUser(userData))
+    //   .catch(error => console.error('Error fetching user profile:', error));
+
     // Simulating fetching user data
     const fetchedUser = {
       firstName: 'Tobias',
@@ -69,9 +94,18 @@ const Profile = () => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsEditing(false);
-    // Here you would typically send the updated user data to your backend
+    // TODO: Update user profile in backend
+    // Example:
+    // try {
+    //   const userId = localStorage.getItem('userId');
+    //   await updateUserProfile(userId, user);
+    //   console.log('Profile updated successfully');
+    // } catch (error) {
+    //   console.error('Error updating profile:', error);
+    //   // Handle error (e.g., show error message to user)
+    // }
     console.log('Updated user:', user);
   };
 
@@ -172,139 +206,11 @@ const Profile = () => {
           </motion.div>
 
           <motion.div id="cv-content" className="space-y-4" variants={containerVariants}>
-            <motion.section variants={itemVariants}>
-              <h2 className="text-2xl font-bold mb-2">Om mig</h2>
-              {isEditing ? (
-                <Textarea
-                  name="about"
-                  value={user.about}
-                  onChange={handleChange}
-                  className="w-full bg-white bg-opacity-20 text-white border-white border-opacity-20"
-                />
-              ) : (
-                <p>{user.about}</p>
-              )}
-            </motion.section>
-
-            <motion.section variants={itemVariants}>
-              <h2 className="text-2xl font-bold mb-2">Utbildning</h2>
-              {user.educations.map((education, index) => (
-                <div key={index} className="mb-2">
-                  {isEditing ? (
-                    <div className="flex items-center space-x-2">
-                      <Input
-                        value={education.school}
-                        onChange={(e) => handleEducationChange(index, 'school', e.target.value)}
-                        placeholder="Skola"
-                        className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
-                      />
-                      <Input
-                        value={education.studyAreas}
-                        onChange={(e) => handleEducationChange(index, 'studyAreas', e.target.value)}
-                        placeholder="Studieområden"
-                        className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
-                      />
-                      <Button onClick={() => handleRemoveEducation(index)} variant="destructive">Ta bort</Button>
-                    </div>
-                  ) : (
-                    <p>{education.school} - {education.studyAreas}</p>
-                  )}
-                </div>
-              ))}
-              {isEditing && (
-                <Button onClick={handleAddEducation} className="mt-2">Lägg till utbildning</Button>
-              )}
-            </motion.section>
-
-            <motion.section variants={itemVariants}>
-              <h2 className="text-2xl font-bold mb-2">Färdigheter</h2>
-              <div className="flex flex-wrap gap-2">
-                {user.skills.map(skill => (
-                  <span key={skill} className="bg-blue-600 text-white px-2 py-1 rounded flex items-center">
-                    {skill}
-                    {isEditing && (
-                      <button onClick={() => handleRemoveSkill(skill)} className="ml-2 text-xs">
-                        <X size={12} />
-                      </button>
-                    )}
-                  </span>
-                ))}
-              </div>
-              {isEditing && (
-                <div className="mt-2">
-                  <Input
-                    placeholder="Lägg till färdighet"
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter') {
-                        handleAddSkill(e.target.value);
-                        e.target.value = '';
-                      }
-                    }}
-                    className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
-                  />
-                </div>
-              )}
-            </motion.section>
-
-            <motion.section variants={itemVariants}>
-              <h2 className="text-2xl font-bold mb-2">Intressen</h2>
-              <div className="flex flex-wrap gap-2">
-                {user.interests.map(interest => (
-                  <span key={interest} className="bg-green-600 text-white px-2 py-1 rounded flex items-center">
-                    {interest}
-                    {isEditing && (
-                      <button onClick={() => handleRemoveInterest(interest)} className="ml-2 text-xs">
-                        <X size={12} />
-                      </button>
-                    )}
-                  </span>
-                ))}
-              </div>
-              {isEditing && (
-                <div className="mt-2">
-                  <Input
-                    placeholder="Lägg till intresse"
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter') {
-                        handleAddInterest(e.target.value);
-                        e.target.value = '';
-                      }
-                    }}
-                    className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
-                  />
-                </div>
-              )}
-            </motion.section>
-
-            <motion.section variants={itemVariants}>
-              <h2 className="text-2xl font-bold mb-2">Önskade branscher</h2>
-              <div className="flex flex-wrap gap-2">
-                {user.desiredIndustries.map(industry => (
-                  <span key={industry} className="bg-purple-600 text-white px-2 py-1 rounded flex items-center">
-                    {industry}
-                    {isEditing && (
-                      <button onClick={() => handleRemoveIndustry(industry)} className="ml-2 text-xs">
-                        <X size={12} />
-                      </button>
-                    )}
-                  </span>
-                ))}
-              </div>
-              {isEditing && (
-                <div className="mt-2">
-                  <Input
-                    placeholder="Lägg till önskad bransch"
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter') {
-                        handleAddIndustry(e.target.value);
-                        e.target.value = '';
-                      }
-                    }}
-                    className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
-                  />
-                </div>
-              )}
-            </motion.section>
+            <ProfileSection title="Om mig" content={user.about} isEditing={isEditing} handleChange={handleChange} />
+            <EducationSection educations={user.educations} isEditing={isEditing} handleEducationChange={handleEducationChange} handleRemoveEducation={handleRemoveEducation} handleAddEducation={handleAddEducation} />
+            <SkillsSection skills={user.skills} isEditing={isEditing} handleRemoveSkill={handleRemoveSkill} handleAddSkill={handleAddSkill} />
+            <InterestsSection interests={user.interests} isEditing={isEditing} handleRemoveInterest={handleRemoveInterest} handleAddInterest={handleAddInterest} />
+            <IndustriesSection industries={user.desiredIndustries} isEditing={isEditing} handleRemoveIndustry={handleRemoveIndustry} handleAddIndustry={handleAddIndustry} />
           </motion.div>
 
           <motion.div variants={itemVariants} className="mt-6 space-x-4">
@@ -321,4 +227,190 @@ const Profile = () => {
   );
 };
 
+const ProfileSection = ({ title, content, isEditing, handleChange }) => (
+  <motion.section variants={itemVariants}>
+    <h2 className="text-2xl font-bold mb-2">{title}</h2>
+    {isEditing ? (
+      <Textarea
+        name="about"
+        value={content}
+        onChange={handleChange}
+        className="w-full bg-white bg-opacity-20 text-white border-white border-opacity-20"
+      />
+    ) : (
+      <p>{content}</p>
+    )}
+  </motion.section>
+);
+
+const EducationSection = ({ educations, isEditing, handleEducationChange, handleRemoveEducation, handleAddEducation }) => (
+  <motion.section variants={itemVariants}>
+    <h2 className="text-2xl font-bold mb-2">Utbildning</h2>
+    {educations.map((education, index) => (
+      <div key={index} className="mb-2">
+        {isEditing ? (
+          <div className="flex items-center space-x-2">
+            <Input
+              value={education.school}
+              onChange={(e) => handleEducationChange(index, 'school', e.target.value)}
+              placeholder="Skola"
+              className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
+            />
+            <Input
+              value={education.studyAreas}
+              onChange={(e) => handleEducationChange(index, 'studyAreas', e.target.value)}
+              placeholder="Studieområden"
+              className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
+            />
+            <Button onClick={() => handleRemoveEducation(index)} variant="destructive">Ta bort</Button>
+          </div>
+        ) : (
+          <p>{education.school} - {education.studyAreas}</p>
+        )}
+      </div>
+    ))}
+    {isEditing && (
+      <Button onClick={handleAddEducation} className="mt-2">Lägg till utbildning</Button>
+    )}
+  </motion.section>
+);
+
+const SkillsSection = ({ skills, isEditing, handleRemoveSkill, handleAddSkill }) => (
+  <motion.section variants={itemVariants}>
+    <h2 className="text-2xl font-bold mb-2">Färdigheter</h2>
+    <div className="flex flex-wrap gap-2">
+      {skills.map(skill => (
+        <span key={skill} className="bg-blue-600 text-white px-2 py-1 rounded flex items-center">
+          {skill}
+          {isEditing && (
+            <button onClick={() => handleRemoveSkill(skill)} className="ml-2 text-xs">
+              <X size={12} />
+            </button>
+          )}
+        </span>
+      ))}
+    </div>
+    {isEditing && (
+      <div className="mt-2">
+        <Input
+          placeholder="Lägg till färdighet"
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleAddSkill(e.target.value);
+              e.target.value = '';
+            }
+          }}
+          className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
+        />
+      </div>
+    )}
+  </motion.section>
+);
+
+const InterestsSection = ({ interests, isEditing, handleRemoveInterest, handleAddInterest }) => (
+  <motion.section variants={itemVariants}>
+    <h2 className="text-2xl font-bold mb-2">Intressen</h2>
+    <div className="flex flex-wrap gap-2">
+      {interests.map(interest => (
+        <span key={interest} className="bg-green-600 text-white px-2 py-1 rounded flex items-center">
+          {interest}
+          {isEditing && (
+            <button onClick={() => handleRemoveInterest(interest)} className="ml-2 text-xs">
+              <X size={12} />
+            </button>
+          )}
+        </span>
+      ))}
+    </div>
+    {isEditing && (
+      <div className="mt-2">
+        <Input
+          placeholder="Lägg till intresse"
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleAddInterest(e.target.value);
+              e.target.value = '';
+            }
+          }}
+          className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
+        />
+      </div>
+    )}
+  </motion.section>
+);
+
+const IndustriesSection = ({ industries, isEditing, handleRemoveIndustry, handleAddIndustry }) => (
+  <motion.section variants={itemVariants}>
+    <h2 className="text-2xl font-bold mb-2">Önskade branscher</h2>
+    <div className="flex flex-wrap gap-2">
+      {industries.map(industry => (
+        <span key={industry} className="bg-purple-600 text-white px-2 py-1 rounded flex items-center">
+          {industry}
+          {isEditing && (
+            <button onClick={() => handleRemoveIndustry(industry)} className="ml-2 text-xs">
+              <X size={12} />
+            </button>
+          )}
+        </span>
+      ))}
+    </div>
+    {isEditing && (
+      <div className="mt-2">
+        <Input
+          placeholder="Lägg till önskad bransch"
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+              handleAddIndustry(e.target.value);
+              e.target.value = '';
+            }
+          }}
+          className="bg-white bg-opacity-20 text-white border-white border-opacity-20"
+        />
+      </div>
+    )}
+  </motion.section>
+);
+
 export default Profile;
+
+// TODO: Create or update PostgreSQL table for user profiles
+// Example SQL:
+// ALTER TABLE users ADD COLUMN profile_image VARCHAR(255);
+// ALTER TABLE users ADD COLUMN educations JSONB[];
+// ALTER TABLE users ADD COLUMN interests TEXT[];
+// ALTER TABLE users ADD COLUMN desired_industries TEXT[];
+
+// TODO: Create backend API endpoints for fetching and updating user profiles
+// Example Express.js routes:
+// app.get('/api/users/:userId', authenticateToken, async (req, res) => {
+//   try {
+//     const { userId } = req.params;
+//     const result = await db.query('SELECT * FROM users WHERE id = $1', [userId]);
+//     if (result.rows.length === 0) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+//     const user = result.rows[0];
+//     res.json(user);
+//   } catch (error) {
+//     console.error('Error fetching user profile:', error);
+//     res.status(500).json({ error: 'Failed to fetch user profile' });
+//   }
+// });
+
+// app.put('/api/users/:userId', authenticateToken, async (req, res) => {
+//   try {
+//     const { userId } = req.params;
+//     const { firstName, lastName, email, phoneNumber, city, educations, interests, skills, desiredIndustries, about } = req.body;
+//     const result = await db.query(
+//       'UPDATE users SET first_name = $1, last_name = $2, email = $3, phone_number = $4, city = $5, educations = $6, interests = $7, skills = $8, desired_industries = $9, about = $10 WHERE id = $11 RETURNING *',
+//       [firstName, lastName, email, phoneNumber, city, JSON.stringify(educations), interests, skills, desiredIndustries, about, userId]
+//     );
+//     if (result.rows.length === 0) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+//     res.json(result.rows[0]);
+//   } catch (error) {
+//     console.error('Error updating user profile:', error);
+//     res.status(500).json({ error: 'Failed to update user profile' });
+//   }
+// });

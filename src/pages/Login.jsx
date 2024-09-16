@@ -31,10 +31,33 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically authenticate the user
-    // For now, we'll just navigate to the profile page
+    // TODO: Implement backend logic for user login
+    // Example backend function:
+    // async function loginUser(credentials) {
+    //   const response = await fetch('/api/login', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(credentials)
+    //   });
+    //   if (!response.ok) throw new Error('Login failed');
+    //   return response.json();
+    // }
+
+    // TODO: Call the backend function and handle the response
+    // try {
+    //   const result = await loginUser({ email, password });
+    //   console.log('User logged in:', result);
+    //   // Store the token in localStorage or a secure cookie
+    //   localStorage.setItem('token', result.token);
+    //   navigate('/profile');
+    // } catch (error) {
+    //   console.error('Login error:', error);
+    //   // Handle error (e.g., show error message to user)
+    // }
+
+    // TODO: Remove this temporary navigation after implementing backend logic
     navigate('/profile');
   };
 
@@ -81,3 +104,25 @@ const Login = () => {
 };
 
 export default Login;
+
+// TODO: Create backend API endpoint for user login
+// Example Express.js route:
+// app.post('/api/login', async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+//     const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
+//     if (result.rows.length === 0) {
+//       return res.status(401).json({ error: 'Invalid credentials' });
+//     }
+//     const user = result.rows[0];
+//     const isPasswordValid = await bcrypt.compare(password, user.password);
+//     if (!isPasswordValid) {
+//       return res.status(401).json({ error: 'Invalid credentials' });
+//     }
+//     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+//     res.json({ token, userId: user.id });
+//   } catch (error) {
+//     console.error('Login error:', error);
+//     res.status(500).json({ error: 'Login failed' });
+//   }
+// });

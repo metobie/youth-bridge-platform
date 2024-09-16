@@ -20,8 +20,31 @@ const Register = () => {
     setFormData(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    // TODO: Implement backend logic for user registration
+    // Example backend function:
+    // async function registerUser(userData) {
+    //   const response = await fetch('/api/register', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(userData)
+    //   });
+    //   if (!response.ok) throw new Error('Registration failed');
+    //   return response.json();
+    // }
+
+    // TODO: Call the backend function and handle the response
+    // try {
+    //   const result = await registerUser(formData);
+    //   console.log('User registered:', result);
+    //   navigate('/profile');
+    // } catch (error) {
+    //   console.error('Registration error:', error);
+    //   // Handle error (e.g., show error message to user)
+    // }
+
+    // TODO: Remove this temporary navigation after implementing backend logic
     console.log(formData);
     navigate('/profile');
   };
@@ -92,3 +115,39 @@ const IndustrySelect = ({ value, onChange }) => (
 );
 
 export default Register;
+
+// TODO: Create PostgreSQL table for users
+// Example SQL:
+// CREATE TABLE users (
+//   id SERIAL PRIMARY KEY,
+//   first_name VARCHAR(50) NOT NULL,
+//   last_name VARCHAR(50) NOT NULL,
+//   email VARCHAR(100) UNIQUE NOT NULL,
+//   password VARCHAR(255) NOT NULL,
+//   phone_number VARCHAR(20),
+//   city VARCHAR(50),
+//   school VARCHAR(100),
+//   study_areas TEXT,
+//   interests TEXT,
+//   skills TEXT[],
+//   desired_industry VARCHAR(50),
+//   about TEXT,
+//   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+// );
+
+// TODO: Create backend API endpoint for user registration
+// Example Express.js route:
+// app.post('/api/register', async (req, res) => {
+//   try {
+//     const { firstName, lastName, email, password, ...otherFields } = req.body;
+//     const hashedPassword = await bcrypt.hash(password, 10);
+//     const result = await db.query(
+//       'INSERT INTO users (first_name, last_name, email, password, ...) VALUES ($1, $2, $3, $4, ...) RETURNING id',
+//       [firstName, lastName, email, hashedPassword, ...]
+//     );
+//     res.status(201).json({ id: result.rows[0].id, message: 'User registered successfully' });
+//   } catch (error) {
+//     console.error('Registration error:', error);
+//     res.status(500).json({ error: 'Registration failed' });
+//   }
+// });
