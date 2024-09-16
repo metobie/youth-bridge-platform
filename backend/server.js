@@ -19,7 +19,6 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-// Authentication middleware
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
@@ -32,7 +31,6 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
-// User registration
 app.post('/api/register', async (req, res) => {
   try {
     const { firstName, lastName, email, password, ...otherFields } = req.body;
@@ -49,7 +47,6 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// User login
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -62,7 +59,7 @@ app.post('/api/login', async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     res.json({ token, userId: user.id });
   } catch (error) {
     console.error('Login error:', error);
@@ -70,7 +67,6 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Get user profile
 app.get('/api/users/:userId', authenticateToken, async (req, res) => {
   try {
     const { userId } = req.params;
@@ -79,7 +75,7 @@ app.get('/api/users/:userId', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
     const user = result.rows[0];
-    delete user.password; // Don't send password to client
+    delete user.password;
     res.json(user);
   } catch (error) {
     console.error('Error fetching user profile:', error);
@@ -87,7 +83,6 @@ app.get('/api/users/:userId', authenticateToken, async (req, res) => {
   }
 });
 
-// Update user profile
 app.put('/api/users/:userId', authenticateToken, async (req, res) => {
   try {
     const { userId } = req.params;
@@ -100,7 +95,7 @@ app.put('/api/users/:userId', authenticateToken, async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
     const updatedUser = result.rows[0];
-    delete updatedUser.password; // Don't send password to client
+    delete updatedUser.password;
     res.json(updatedUser);
   } catch (error) {
     console.error('Error updating user profile:', error);
@@ -108,7 +103,6 @@ app.put('/api/users/:userId', authenticateToken, async (req, res) => {
   }
 });
 
-// Create booking
 app.post('/api/bookings', authenticateToken, async (req, res) => {
   try {
     const { coachEmail, date, time, message } = req.body;
@@ -124,7 +118,6 @@ app.post('/api/bookings', authenticateToken, async (req, res) => {
   }
 });
 
-// Get user bookings
 app.get('/api/bookings/user/:userId', authenticateToken, async (req, res) => {
   try {
     const { userId } = req.params;
@@ -136,7 +129,6 @@ app.get('/api/bookings/user/:userId', authenticateToken, async (req, res) => {
   }
 });
 
-// Admin: Search users
 app.get('/api/admin/users/search', authenticateToken, async (req, res) => {
   try {
     const { term } = req.query;
@@ -151,7 +143,6 @@ app.get('/api/admin/users/search', authenticateToken, async (req, res) => {
   }
 });
 
-// Admin: Get all bookings
 app.get('/api/admin/bookings', authenticateToken, async (req, res) => {
   try {
     const result = await pool.query(
