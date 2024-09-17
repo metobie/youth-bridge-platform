@@ -31,6 +31,20 @@ const authenticateToken = (req, res, next) => {
   });
 };
 
+const isAdmin = async (req, res, next) => {
+  try {
+    const result = await pool.query('SELECT is_admin FROM users WHERE id = $1', [req.user.userId]);
+    if (result.rows[0].is_admin) {
+      next();
+    } else {
+      res.status(403).json({ error: 'Access denied' });
+    }
+  } catch (error) {
+    console.error('Admin check error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 app.post('/api/register', async (req, res) => {
   try {
     const { firstName, lastName, email, password, ...otherFields } = req.body;
@@ -60,16 +74,33 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
-    res.json({ token, userId: user.id });
+    res.json({ token, user: { id: user.id, email: user.email, isAdmin: user.is_admin } });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ error: 'Login failed' });
   }
 });
 
+app.get('/api/auth/verify', authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query('SELECT id, email, is_admin FROM users WHERE id = $1', [req.user.userId]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const user = result.rows[0];
+    res.json({ id: user.id, email: user.email, isAdmin: user.is_admin });
+  } catch (error) {
+    console.error('Auth verification error:', error);
+    res.status(500).json({ error: 'Auth verification failed' });
+  }
+});
+
 app.get('/api/users/:userId', authenticateToken, async (req, res) => {
   try {
     const { userId } = req.params;
+    if (parseInt(userId) !== req.user.userId) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
     const result = await pool.query('SELECT * FROM users WHERE id = $1', [userId]);
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' });
@@ -86,6 +117,9 @@ app.get('/api/users/:userId', authenticateToken, async (req, res) => {
 app.put('/api/users/:userId', authenticateToken, async (req, res) => {
   try {
     const { userId } = req.params;
+    if (parseInt(userId) !== req.user.userId) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
     const { firstName, lastName, email, phoneNumber, city, educations, interests, skills, desiredIndustries, about } = req.body;
     const result = await pool.query(
       'UPDATE users SET first_name = $1, last_name = $2, email = $3, phone_number = $4, city = $5, educations = $6, interests = $7, skills = $8, desired_industries = $9, about = $10 WHERE id = $11 RETURNING *',
@@ -121,6 +155,9 @@ app.post('/api/bookings', authenticateToken, async (req, res) => {
 app.get('/api/bookings/user/:userId', authenticateToken, async (req, res) => {
   try {
     const { userId } = req.params;
+    if (parseInt(userId) !== req.user.userId) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
     const result = await pool.query('SELECT * FROM bookings WHERE user_id = $1', [userId]);
     res.json(result.rows);
   } catch (error) {
@@ -129,7 +166,7 @@ app.get('/api/bookings/user/:userId', authenticateToken, async (req, res) => {
   }
 });
 
-app.get('/api/admin/users/search', authenticateToken, async (req, res) => {
+app.get('/api/admin/users/search', authenticateToken, isAdmin, async (req, res) => {
   try {
     const { term } = req.query;
     const result = await pool.query(
@@ -143,7 +180,7 @@ app.get('/api/admin/users/search', authenticateToken, async (req, res) => {
   }
 });
 
-app.get('/api/admin/bookings', authenticateToken, async (req, res) => {
+app.get('/api/admin/bookings', authenticateToken, isAdmin, async (req, res) => {
   try {
     const result = await pool.query(
       'SELECT b.*, u.first_name, u.last_name FROM bookings b JOIN users u ON b.user_id = u.id ORDER BY b.booking_date, b.booking_time'

@@ -3,62 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { 
-    opacity: 1,
-    transition: { staggerChildren: 0.1 }
-  },
-  exit: { 
-    opacity: 0,
-    transition: { staggerChildren: 0.05, staggerDirection: -1 }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1,
-    transition: { type: 'spring', stiffness: 100 }
-  },
-  exit: { y: -20, opacity: 0 }
-};
+import { useAuth } from '../contexts/AuthContext';
+import { containerVariants, itemVariants } from '../utils/animationVariants';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Implement backend logic for user login
-    // Example backend function:
-    // async function loginUser(credentials) {
-    //   const response = await fetch('/api/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(credentials)
-    //   });
-    //   if (!response.ok) throw new Error('Login failed');
-    //   return response.json();
-    // }
-
-    // TODO: Call the backend function and handle the response
-    // try {
-    //   const result = await loginUser({ email, password });
-    //   console.log('User logged in:', result);
-    //   // Store the token in localStorage or a secure cookie
-    //   localStorage.setItem('token', result.token);
-    //   navigate('/profile');
-    // } catch (error) {
-    //   console.error('Login error:', error);
-    //   // Handle error (e.g., show error message to user)
-    // }
-
-    // TODO: Remove this temporary navigation after implementing backend logic
-    navigate('/profile');
+    setError('');
+    try {
+      const user = await login(email, password);
+      navigate(`/profile/${user.id}`);
+    } catch (error) {
+      setError('Invalid email or password');
+    }
   };
 
   return (
@@ -72,6 +35,7 @@ const Login = () => {
       <motion.div className="flex-grow flex items-center justify-center px-4" variants={containerVariants}>
         <motion.div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg w-full max-w-md" variants={itemVariants}>
           <motion.h2 className="text-2xl font-bold mb-6 text-center" variants={itemVariants}>Logga in</motion.h2>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
           <motion.form onSubmit={handleSubmit} className="space-y-4" variants={containerVariants}>
             <motion.div variants={itemVariants}>
               <Input
@@ -104,25 +68,3 @@ const Login = () => {
 };
 
 export default Login;
-
-// TODO: Create backend API endpoint for user login
-// Example Express.js route:
-// app.post('/api/login', async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     const result = await db.query('SELECT * FROM users WHERE email = $1', [email]);
-//     if (result.rows.length === 0) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-//     const user = result.rows[0];
-//     const isPasswordValid = await bcrypt.compare(password, user.password);
-//     if (!isPasswordValid) {
-//       return res.status(401).json({ error: 'Invalid credentials' });
-//     }
-//     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-//     res.json({ token, userId: user.id });
-//   } catch (error) {
-//     console.error('Login error:', error);
-//     res.status(500).json({ error: 'Login failed' });
-//   }
-// });
