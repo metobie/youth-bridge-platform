@@ -5,14 +5,13 @@ import { itemVariants } from '../utils/animationVariants';
 import { Check } from 'lucide-react';
 
 const skills = [
-  'Kommunikation', 'Ledarskap', 'Problemlösning', 'Kreativitet', 'Teamwork', 
-  'Analytisk förmåga', 'Projektledning', 'Språkkunskaper', 'Teknisk kompetens', 
-  'Kundservice', 'Sociala medier', 'Dataanalys', 'Grafisk design', 
-  'Skriftlig kommunikation', 'Presentationsteknik', 'Tidshantering', 
-  'Adaptionsförmåga', 'Kritiskt tänkande', 'Stresshantering', 'Multitasking',
-  'Försäljning', 'Marknadsföring', 'Ekonomi', 'Programmering', 'Fotografering',
-  'Videoredigering', 'Eventplanering', 'Konflikthantering', 'Förhandling', 'Coaching'
-];
+  'Adaptionsförmåga', 'Analytisk förmåga', 'Coaching', 'Dataanalys', 'Ekonomi',
+  'Eventplanering', 'Fotografering', 'Förhandling', 'Försäljning', 'Grafisk design',
+  'Kommunikation', 'Konflikthantering', 'Kreativitet', 'Kritiskt tänkande', 'Kundservice',
+  'Ledarskap', 'Marknadsföring', 'Multitasking', 'Presentationsteknik', 'Problemlösning',
+  'Programmering', 'Projektledning', 'Skriftlig kommunikation', 'Sociala medier', 'Språkkunskaper',
+  'Stresshantering', 'Teamwork', 'Teknisk kompetens', 'Tidshantering', 'Videoredigering'
+].sort();
 
 const SkillSelector = ({ skills: selectedSkills, onChange }) => {
   const handleSkillChange = (skill) => {
