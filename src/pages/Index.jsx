@@ -36,7 +36,7 @@ const Index = () => {
       exit="exit"
     >
       <motion.main className="flex-grow flex flex-col items-center justify-center px-4 text-center relative" variants={containerVariants}>
-        <motion.h1 className="text-5xl font-bold mb-6" variants={itemVariants}>Yo! Välkommen till Rider 🚀</motion.h1>
+        <motion.h1 className="text-5xl font-bold mb-6" variants={itemVariants}>Välkommen till Rider 🚀</motion.h1>
         <motion.p className="text-xl mb-8 max-w-2xl" variants={itemVariants}>
           Redo att kicka igång din karriär? Vi fixar ditt CV och boostar dina jobbchanser med vår grymma online coaching. Let's go! 🔥
         </motion.p>
