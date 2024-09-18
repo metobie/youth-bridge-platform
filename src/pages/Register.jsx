@@ -80,23 +80,27 @@ const InputGroup = ({ children }) => (
   </motion.div>
 );
 
-const IndustrySelect = ({ value, onChange }) => (
-  <motion.div variants={itemVariants}>
-    <Select name="desiredIndustry" onValueChange={(value) => onChange({ target: { name: 'desiredIndustry', value } })}>
-      <SelectTrigger className="bg-white text-gray-900 border-white border-opacity-20">
-        <SelectValue placeholder="Önskad bransch" />
-      </SelectTrigger>
-      <SelectContent>
-        {[
-          'IT', 'Finans', 'Sjukvård', 'Utbildning', 'Marknadsföring', 'Detaljhandel', 
-          'Restaurang', 'Kundservice', 'E-handel', 'Sociala medier', 'Eventplanering', 
-          'Logistik', 'Försäljning', 'Administration', 'Kreativa yrken'
-        ].map(industry => (
-          <SelectItem key={industry.toLowerCase()} value={industry.toLowerCase()}>{industry}</SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  </motion.div>
-);
+const IndustrySelect = ({ value, onChange }) => {
+  const industries = [
+    'Administration', 'Detaljhandel', 'E-handel', 'Eventplanering', 'Finans', 
+    'Försäljning', 'IT', 'Kreativa yrken', 'Kundservice', 'Logistik', 
+    'Marknadsföring', 'Restaurang', 'Sjukvård', 'Sociala medier', 'Utbildning'
+  ].sort();
+
+  return (
+    <motion.div variants={itemVariants}>
+      <Select name="desiredIndustry" onValueChange={(value) => onChange({ target: { name: 'desiredIndustry', value } })}>
+        <SelectTrigger className="bg-white text-gray-900 border-white border-opacity-20">
+          <SelectValue placeholder="Önskad bransch" />
+        </SelectTrigger>
+        <SelectContent>
+          {industries.map(industry => (
+            <SelectItem key={industry.toLowerCase()} value={industry.toLowerCase()}>{industry}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </motion.div>
+  );
+};
 
 export default Register;
