@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -61,6 +61,9 @@ const Login = () => {
               <Button type="submit" className="w-full bg-white text-blue-900 hover:bg-gray-100">Logga in</Button>
             </motion.div>
           </motion.form>
+          <motion.p className="mt-4 text-center" variants={itemVariants}>
+            Har du inget konto? <Link to="/register" className="text-blue-300 hover:underline">Registrera dig här</Link>
+          </motion.p>
         </motion.div>
       </motion.div>
     </motion.div>
