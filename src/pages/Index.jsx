@@ -36,26 +36,32 @@ const Index = () => {
       exit="exit"
     >
       <motion.main className="flex-grow flex flex-col items-center justify-center px-4 text-center relative" variants={containerVariants}>
-        <motion.h1 className="text-5xl font-bold mb-6" variants={itemVariants}>Välkommen till Rider</motion.h1>
-        <motion.p className="text-xl mb-8 max-w-2xl" variants={itemVariants}>Din väg till drömjobbet börjar här. Få hjälp med ditt CV och boka online coaching med våra experter.</motion.p>
+        <motion.h1 className="text-5xl font-bold mb-6" variants={itemVariants}>Yo! Välkommen till Rider 🚀</motion.h1>
+        <motion.p className="text-xl mb-8 max-w-2xl" variants={itemVariants}>
+          Redo att kicka igång din karriär? Vi fixar ditt CV och boostar dina jobbchanser med vår grymma online coaching. Let's go! 🔥
+        </motion.p>
         
         <motion.div className="space-y-4 mb-12" variants={containerVariants}>
-          <FeatureItem text="Skapa ett professionellt CV" />
-          <FeatureItem text="Boka online coaching" />
-          <FeatureItem text="Få personlig feedback" />
-          <FeatureItem text="Hitta ditt drömjobb" />
+          <FeatureItem text="Pimpa ditt CV som en boss" />
+          <FeatureItem text="Boka online coaching med våra proffs" />
+          <FeatureItem text="Få personlig feedback som tar dig till nästa level" />
+          <FeatureItem text="Landa ditt drömjobb och lev livet" />
         </motion.div>
         
         <motion.div className="space-x-4" variants={itemVariants}>
           <Button asChild size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
-            <Link to="/register">Kom igång <ArrowRight className="ml-2 h-5 w-5" /></Link>
+            <Link to="/register">Joina nu <ArrowRight className="ml-2 h-5 w-5" /></Link>
           </Button>
           <Button asChild size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
             <Link to="/login">Logga in</Link>
           </Button>
         </motion.div>
 
-        <motion.div className="absolute bottom-8 left-0 right-0 flex justify-center space-x-6" variants={itemVariants}>
+        <motion.p className="mt-6 text-lg" variants={itemVariants}>
+          Psst! Följ oss för daglig dos av karriärtips och inspo! 👇
+        </motion.p>
+
+        <motion.div className="mt-4 flex justify-center space-x-6" variants={itemVariants}>
           <SocialIcon href="https://www.instagram.com/bearider.se/" icon={<Instagram className="h-6 w-6" />} label="Instagram" />
           <SocialIcon href="https://www.linkedin.com/company/rider-by-wikan-personal/" icon={<Linkedin className="h-6 w-6" />} label="LinkedIn" />
           <SocialIcon href="mailto:hej@bearider.se" icon={<Mail className="h-6 w-6" />} label="Email" />
