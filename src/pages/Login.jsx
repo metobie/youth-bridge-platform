@@ -44,7 +44,7 @@ const Login = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-white text-black placeholder-gray-500"
+                className="bg-white bg-opacity-20 text-white placeholder-gray-300"
               />
             </motion.div>
             <motion.div variants={itemVariants}>
@@ -54,7 +54,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="bg-white text-black placeholder-gray-500"
+                className="bg-white bg-opacity-20 text-white placeholder-gray-300"
               />
             </motion.div>
             <motion.div variants={itemVariants}>
