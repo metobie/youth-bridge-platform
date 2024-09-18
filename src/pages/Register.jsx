@@ -7,7 +7,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { containerVariants, itemVariants } from '../utils/animationVariants';
 import SkillSelector from '../components/SkillSelector';
-import { sendWelcomeEmail } from '../utils/emailService';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -24,25 +23,6 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    
-    // TODO: Implement user registration logic here
-    // Example:
-    // const response = await fetch('/api/register', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData)
-    // });
-    // if (response.ok) {
-    //   const userData = await response.json();
-    //   // Send welcome email
-    //   await sendWelcomeEmail(formData.email, formData.firstName);
-    //   navigate('/profile');
-    // } else {
-    //   // Handle registration error
-    // }
-
-    // For now, we'll just simulate the email sending and navigation
-    await sendWelcomeEmail(formData.email, formData.firstName);
     navigate('/profile');
   };
 

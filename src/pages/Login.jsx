@@ -61,14 +61,9 @@ const Login = () => {
               <Button type="submit" className="w-full bg-white text-blue-900 hover:bg-gray-100">Logga in</Button>
             </motion.div>
           </motion.form>
-          <motion.div className="mt-4 text-center space-y-2" variants={itemVariants}>
-            <p>
-              <Link to="/reset-password" className="text-blue-300 hover:underline">Glömt lösenord?</Link>
-            </p>
-            <p>
-              Har du inget konto? <Link to="/register" className="text-blue-300 hover:underline">Registrera dig här</Link>
-            </p>
-          </motion.div>
+          <motion.p className="mt-4 text-center" variants={itemVariants}>
+            Har du inget konto? <Link to="/register" className="text-blue-300 hover:underline">Registrera dig här</Link>
+          </motion.p>
         </motion.div>
       </motion.div>
     </motion.div>
