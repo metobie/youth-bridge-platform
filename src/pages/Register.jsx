@@ -87,7 +87,11 @@ const IndustrySelect = ({ value, onChange }) => (
         <SelectValue placeholder="Önskad bransch" />
       </SelectTrigger>
       <SelectContent>
-        {['IT', 'Finans', 'Sjukvård', 'Utbildning', 'Marknadsföring'].map(industry => (
+        {[
+          'IT', 'Finans', 'Sjukvård', 'Utbildning', 'Marknadsföring', 'Detaljhandel', 
+          'Restaurang', 'Kundservice', 'E-handel', 'Sociala medier', 'Eventplanering', 
+          'Logistik', 'Försäljning', 'Administration', 'Kreativa yrken'
+        ].map(industry => (
           <SelectItem key={industry.toLowerCase()} value={industry.toLowerCase()}>{industry}</SelectItem>
         ))}
       </SelectContent>
