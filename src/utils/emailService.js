@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+const nodemailer = require('nodemailer');
 
 // Configure the email transporter
 const transporter = nodemailer.createTransport({
@@ -27,7 +27,7 @@ const imapTransporter = nodemailer.createTransport({
 });
 */
 
-export const sendWelcomeEmail = async (to, firstName) => {
+const sendWelcomeEmail = async (to, firstName) => {
   const mailOptions = {
     from: '"Rider Team" <noreply@bearider.se>',
     to: to,
@@ -54,7 +54,7 @@ export const sendWelcomeEmail = async (to, firstName) => {
   }
 };
 
-export const sendPasswordResetEmail = async (to, resetToken) => {
+const sendPasswordResetEmail = async (to, resetToken) => {
   const resetUrl = `https://bearider.se/reset-password?token=${resetToken}`;
   const mailOptions = {
     from: '"Rider Team" <noreply@bearider.se>',
@@ -79,3 +79,5 @@ export const sendPasswordResetEmail = async (to, resetToken) => {
     console.error('Error sending password reset email:', error);
   }
 };
+
+module.exports = { sendWelcomeEmail, sendPasswordResetEmail };
