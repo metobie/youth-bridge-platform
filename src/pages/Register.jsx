@@ -46,7 +46,7 @@ const Register = () => {
     navigate('/profile');
   };
 
-  const inputClass = "bg-white bg-opacity-20 text-white placeholder-white";
+  const inputClass = "bg-white text-black placeholder-gray-500";
 
   return (
     <motion.div 
@@ -103,7 +103,7 @@ const InputGroup = ({ children }) => (
 const IndustrySelect = ({ value, onChange }) => (
   <motion.div variants={itemVariants}>
     <Select name="desiredIndustry" onValueChange={(value) => onChange({ target: { name: 'desiredIndustry', value } })}>
-      <SelectTrigger className="bg-white bg-opacity-20 text-white border-white border-opacity-20">
+      <SelectTrigger className="bg-white text-black border-white border-opacity-20">
         <SelectValue placeholder="Önskad bransch" />
       </SelectTrigger>
       <SelectContent>
