@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import NavMenu from "./components/NavMenu";
 import Index from "./pages/Index";
@@ -11,21 +11,53 @@ import AdminPortal from "./pages/AdminPortal";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PrivateRoute from "./components/PrivateRoute";
-import { AuthProvider } from "./contexts/AuthContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
 const AnimatedRoutes = () => {
-  const location = useLocation();
+  const { user } = useAuth();
+
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
+      <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile/:userId" element={<PrivateRoute><Profile /></PrivateRoute>} />
-        <Route path="/booking" element={<PrivateRoute><Booking /></PrivateRoute>} />
-        <Route path="/admin" element={<PrivateRoute adminOnly={true}><AdminPortal /></PrivateRoute>} />
+        <Route 
+          path="/profile" 
+          element={
+            user ? (
+              <Navigate to={`/profile/${user.id}`} replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } 
+        />
+        <Route 
+          path="/profile/:userId" 
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/booking" 
+          element={
+            <PrivateRoute>
+              <Booking />
+            </PrivateRoute>
+          } 
+        />
+        <Route 
+          path="/admin" 
+          element={
+            <PrivateRoute adminOnly={true}>
+              <AdminPortal />
+            </PrivateRoute>
+          } 
+        />
       </Routes>
     </AnimatePresence>
   );
