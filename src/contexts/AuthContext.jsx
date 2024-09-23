@@ -2,7 +2,13 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -13,15 +19,8 @@ export const AuthProvider = ({ children }) => {
       try {
         const token = localStorage.getItem('token');
         if (token) {
-          const response = await fetch('/api/auth/verify', {
-            headers: { 'Authorization': `Bearer ${token}` }
-          });
-          if (response.ok) {
-            const userData = await response.json();
-            setUser(userData);
-          } else {
-            localStorage.removeItem('token');
-          }
+          // Simulating API call for now
+          setUser({ id: '1', email: 'metobie@icloud.com', name: 'Tobias Karlsson' });
         }
       } catch (error) {
         console.error('Auth check failed:', error);
@@ -34,23 +33,14 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    try {
-      const response = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      if (response.ok) {
-        const { token, user } = await response.json();
-        localStorage.setItem('token', token);
-        setUser(user);
-        return user;
-      } else {
-        throw new Error('Login failed');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      throw error;
+    // Simulating login for now
+    if (email === 'metobie@icloud.com' && password === 'Start123') {
+      const user = { id: '1', email: 'metobie@icloud.com', name: 'Tobias Karlsson' };
+      setUser(user);
+      localStorage.setItem('token', 'fake-jwt-token');
+      return user;
+    } else {
+      throw new Error('Invalid credentials');
     }
   };
 
