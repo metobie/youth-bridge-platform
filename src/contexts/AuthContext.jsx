@@ -34,20 +34,6 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    // Static login for Tobias Karlsson
-    if (email === 'metobie@icloud.com' && password === 'Start123') {
-      const staticUser = {
-        id: 'static-id',
-        email: 'metobie@icloud.com',
-        firstName: 'Tobias',
-        lastName: 'Karlsson',
-        isAdmin: false
-      };
-      localStorage.setItem('token', 'static-token');
-      setUser(staticUser);
-      return staticUser;
-    }
-
     try {
       const response = await fetch('/api/login', {
         method: 'POST',

@@ -64,9 +64,6 @@ const Login = () => {
           <motion.p className="mt-4 text-center" variants={itemVariants}>
             Har du inget konto? <Link to="/register" className="text-blue-300 hover:underline">Registrera dig här</Link>
           </motion.p>
-          <motion.p className="mt-2 text-center text-sm text-gray-400" variants={itemVariants}>
-            Statisk inloggning: metobie@icloud.com / Start123
-          </motion.p>
         </motion.div>
       </motion.div>
     </motion.div>
